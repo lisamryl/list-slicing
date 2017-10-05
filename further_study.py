@@ -30,8 +30,11 @@ def custom_len(input_list):
         8
 
     """
+    count = 0
+    for items in input_list:
+        count += 1
 
-    return 0
+    return count
 
 
 # For the next four exercises, you'll need to be clever and think about ways
@@ -58,8 +61,7 @@ def custom_append(input_list, value):
         True
 
     """
-
-    pass
+    input_list[custom_len(input_list):] = [value]
 
 
 def custom_extend(input_list, second_list):
@@ -78,7 +80,7 @@ def custom_extend(input_list, second_list):
 
     """
 
-    pass
+    input_list[:] = input_list + second_list
 
 
 def custom_insert(input_list, index, value):
@@ -96,7 +98,8 @@ def custom_insert(input_list, index, value):
 
     """
 
-    pass
+    #input_list[:] = input_list[:index] + [value] + input_list[index:]
+    input_list[index:index] = [value]
 
 
 def custom_remove(input_list, value):
@@ -114,8 +117,14 @@ def custom_remove(input_list, value):
         True
 
     """
+    count = 0
+    for item in input_list:
+        if item == value:
+            break
+        count += 1
 
-    pass
+    #input_list[:] = input_list[:count] + input_list[count+1:]
+    input_list[count:count+1] = []
 
 
 def custom_pop(input_list):
@@ -133,8 +142,10 @@ def custom_pop(input_list):
         ['Jan', 'Feb']
 
     """
+    last_one = last(input_list)
+    input_list[:] = init(input_list)
 
-    return None
+    return last_one
 
 
 def custom_index(input_list, value):
@@ -149,8 +160,11 @@ def custom_index(input_list, value):
         1
 
     """
-
-    return 0
+    count = 0
+    for item in input_list:
+        if item == value:
+            return count
+        count += 1
 
 
 def custom_count(input_list, value):
@@ -165,8 +179,12 @@ def custom_count(input_list, value):
         2
 
     """
+    count = 0
+    for item in input_list:
+        if item == value:
+            count += 1
 
-    return 0
+    return count
 
 
 def custom_reverse(input_list):
@@ -185,7 +203,8 @@ def custom_reverse(input_list):
 
     """
 
-    pass
+    input_list[:] = input_list[::-1]
+    #list unpacking another option
 
 
 def custom_contains(input_list, value):
@@ -204,8 +223,11 @@ def custom_contains(input_list, value):
         True
 
     """
+    for item in input_list:
+        if item == value:
+            return True
 
-    return None
+    return False
 
 
 def custom_equality(some_list, another_list):
@@ -223,8 +245,24 @@ def custom_equality(some_list, another_list):
         False
 
     """
+    def custom_range(stop):
+        """ """
+        count = 0
+        iterable_list = []
+        while count < max_range:
+            iterable_list[:] = iterable_list + [count]
+            count += 1
+        return iterable_list
 
-    return None
+    if custom_len(another_list) != custom_len(some_list):
+        return False
+
+    max_range = custom_len(some_list)
+    for i in  custom_range(max_range):
+        if some_list[i] != another_list[i]:
+            return False
+    return True
+    #return some_list == another_list
 
 
 ##############################################################################
